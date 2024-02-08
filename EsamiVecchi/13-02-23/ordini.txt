@@ -1,0 +1,4 @@
+Gianni ViaVerdi 2 1 0 1
+Marco ViaRossi 0 2
+Giovanni ViaBianchi 1 1 1 2
+Gianni ViaVerdi 1 2

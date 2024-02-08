@@ -1,0 +1,4 @@
+Cliente0 Medico0 Mario 01/01/2001 9 12 02/03/2001 15 17
+Cliente1 Medico1 Gianni 02/02/2002 10 15 02/02/2002 16 21 03/02/2002 14 16
+Cliente0 Medico0 Mario 04/04/2004 10 13
+Cliente1 Medico0 Gianni 03/03/2005 10 15

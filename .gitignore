@@ -1,0 +1,20 @@
+# no extension
+*
+!/**/
+!*.*
+
+# mantain makefiles
+![Mm]ake[Ff]ile
+
+# bin files
+*.out
+*.bat
+*.exe
+
+# bin folders
+out/
+bin/
+dist/
+
+# debug
+.vscode/

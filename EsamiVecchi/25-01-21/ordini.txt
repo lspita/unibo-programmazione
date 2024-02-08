@@ -1,0 +1,4 @@
+Mario 0 2 1 5
+Gianni 2 6
+Mario 2 1
+Carlo 0 1 1 1 2 2

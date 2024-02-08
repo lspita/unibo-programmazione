@@ -1,0 +1,4 @@
+0 Gianni 9 3 13 2
+1 Marco 15 3 9 3
+2 Silvio 12 3
+3 Tommaso 10 1 9 1 13 4

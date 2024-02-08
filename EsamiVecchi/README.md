@@ -1,0 +1,25 @@
+# Legenda
+- `// TEST`: codice aggiunto post-esame per testare
+- `// ERRORE`: errore fatto (ora corretto)
+
+# Esami testati
+- [08-07-22](./08-07-22/testo080722.pdf) (1.5h)
+- [09-06-21](./09-06-21/testo090621.pdf) (1.5h - 1 errore)
+- [12-01-21](./12-01-21/testo120121.pdf) (1.5h)
+- [12-07-23](./12-07-23/testo120723.pdf) (2h - 2 errori)
+- [13-02-23](./13-02-23/testo130223.pdf) (2h - 4 errori)
+- [25-01-23](./25-01-23/testo250123.pdf) (2h)
+- [11-01-23](./11-01-23/testo110123.pdf) (2h)
+- [13-09-21](./13-09-21/testo130921.pdf) (1.5h - 3 errori)
+- [13-09-22](./13-09-22/testo130922.pdf) (2h - medici)
+- [14-02-22](./14-02-22/testo140222.pdf) (2h - 3 errori)
+- [15-02-21](./15-02-21/testo150221.pdf) (1.5h - 2 errori)
+- [17-01-22](./17-01-22/testo170122.pdf) (1.5h)
+- [31-01-22](./31-01-22/testo310122.pdf) (2h)
+- [25-01-21](./25-01-21/testo250121.pdf) (1.5h)
+- [21-06-22](./21-06-22/testo210622.pdf) (2h)s
+- [12-06-23](./12-06-23/testo120623.pdf) (2h)
+
+# Esami da testare
+
+# Esami da fare
