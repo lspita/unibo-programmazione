@@ -374,6 +374,28 @@ void free_media(Media *val)
     }
 }
 
+bool is_empty_media(Media *lista)
+{
+    return lista == NULL;
+}
+
+Media *peek_media(Media *lista)
+{
+    // ritorna testa
+    return lista;
+}
+
+Media *pop_media(Media **lista)
+{
+    if (is_empty_media(*lista))
+        return NULL;
+
+    Media *val = peek_media(*lista);
+    *lista = val->next;
+    val->next = NULL;
+    return val;
+}
+
 Studente *leggi_file(char *filename)
 {
     Studente *studenti = NULL;
@@ -505,9 +527,12 @@ void stampa_pagella_studente(
     Professore *professori, int size_professori)
 {
     // loop pagella
-    Media *m = pagella;
-    while (m != NULL)
+
+    // ERRORE: tratta media come pila
+
+    while (!is_empty_media(pagella))
     {
+        Media *m = pop_media(&pagella);
         // cerca materia
         Materia *mat = find_materia(m->id_materia, materie, size_materie);
         if (mat == NULL)
@@ -534,7 +559,7 @@ void stampa_pagella_studente(
         }
 
         // prossimo
-        m = m->next;
+        free_media(m);
     }
 }
 
@@ -645,7 +670,6 @@ int main()
     putchar('\n');
 
     free_studente(studenti);
-    free_media(pagella);
     free(materie);
     free(professori);
     return 0;
