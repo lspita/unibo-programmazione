@@ -11,7 +11,7 @@
 
 #define FIELNAME "studenti.txt"
 #define STUDENTE_PAGELLA "2-145" // id studente per prepara_pagella_studente
-#define TODAY "08/02/2024" // giornata di oggi per confronto dati
+#define TODAY "08/02/2024"       // giornata di oggi per confronto dati
 
 #define LEN_ID_STUDENTE 12
 #define LEN_ID_MATERIA 12
@@ -29,23 +29,26 @@
 #define REALLOC_JUMP 5 /* di quanto reallocare i vettori dinamici ogni volta */
 
 // coppia id_materia / voto
-typedef struct Esito {
+typedef struct Esito
+{
     char id_materia[LEN_ID_MATERIA + 1];
     float voto;
 
     struct Esito *next;
 } Esito;
 
-typedef struct Studente {
+typedef struct Studente
+{
     char id_studente[LEN_ID_STUDENTE + 1];
     Esito *esiti;
 
     struct Studente *next;
 } Studente;
 
-typedef struct Materia {
+typedef struct Materia
+{
     char id_materia[LEN_ID_MATERIA + 1];
-    char descrizione[LEN_DESCRIZIONE_MATERIA  +1];
+    char descrizione[LEN_DESCRIZIONE_MATERIA + 1];
     char id_professore[LEN_ID_PROFESSORE + 1];
 } Materia;
 
@@ -56,7 +59,8 @@ typedef struct Professore
     char data_inizio[LEN_DATA + 1];
 } Professore;
 
-typedef struct Media {
+typedef struct Media
+{
     char id_materia[LEN_ID_MATERIA + 1];
     float media_voti;
     int occorrenze_materia; // quante volte è comparsa la materia allo studente
@@ -64,7 +68,8 @@ typedef struct Media {
     struct Media *next;
 } Media;
 
-Esito *new_esito(char *materia, float voto) {
+Esito *new_esito(char *materia, float voto)
+{
     Esito *val = (Esito *)malloc(sizeof(Esito));
     assert(val != NULL);
     // assegna dati
@@ -76,13 +81,16 @@ Esito *new_esito(char *materia, float voto) {
 }
 
 // inserimento in testa
-void push_esito(Esito *val, Esito **lista) {
-    if (val == NULL) return;
+void push_esito(Esito *val, Esito **lista)
+{
+    if (val == NULL)
+        return;
     val->next = *lista;
     *lista = val;
 }
 
-void free_esito(Esito *val) {
+void free_esito(Esito *val)
+{
     // loop lista
     while (val != NULL)
     {
@@ -94,7 +102,8 @@ void free_esito(Esito *val) {
     }
 }
 
-Studente *new_studente(char *id, Esito *esiti) {
+Studente *new_studente(char *id, Esito *esiti)
+{
     Studente *val = (Studente *)malloc(sizeof(Studente));
     assert(val != NULL);
     // assegna dati
@@ -106,18 +115,22 @@ Studente *new_studente(char *id, Esito *esiti) {
 }
 
 // inserimento in testa
-void push_studente(Studente *val, Studente **lista) {
-    if (val == NULL) return;
+void push_studente(Studente *val, Studente **lista)
+{
+    if (val == NULL)
+        return;
     val->next = *lista;
     *lista = val;
 }
 
-Studente *find_studente(char *id, Studente *lista) {
+Studente *find_studente(char *id, Studente *lista)
+{
     // loop lista
     Studente *s = lista;
     while (s != NULL)
     {
-        if (strcmp(id, s->id_studente) == 0) {
+        if (strcmp(id, s->id_studente) == 0)
+        {
             // trovato
             return s;
         }
@@ -129,7 +142,8 @@ Studente *find_studente(char *id, Studente *lista) {
     return NULL;
 }
 
-void free_studente(Studente *val) {
+void free_studente(Studente *val)
+{
     // loop lista
     while (val != NULL)
     {
@@ -142,7 +156,8 @@ void free_studente(Studente *val) {
     }
 }
 
-Materia new_materia(char *id, char *descrizione, char *professore) {
+Materia new_materia(char *id, char *descrizione, char *professore)
+{
     Materia val;
     // assegna dati
     strcpy(val.id_materia, id);
@@ -153,7 +168,8 @@ Materia new_materia(char *id, char *descrizione, char *professore) {
 }
 
 // inseirmento con priorità
-int push_materia(Materia val, Materia **vettore, int *size_vettore) {
+int push_materia(Materia val, Materia **vettore, int *size_vettore)
+{
     int size = *size_vettore;
     // cerca index dove inserire
     int index = -1;
@@ -161,13 +177,15 @@ int push_materia(Materia val, Materia **vettore, int *size_vettore) {
     {
         Materia other = (*vettore)[i];
         // id crescente
-        if (strcmp(val.id_materia, other.id_materia) < 0) {
+        if (strcmp(val.id_materia, other.id_materia) < 0)
+        {
             // index trovata
             index = i;
             break;
         }
     }
-    if (index == -1) {
+    if (index == -1)
+    {
         // in coda
         index = size;
     }
@@ -189,32 +207,39 @@ int push_materia(Materia val, Materia **vettore, int *size_vettore) {
 }
 
 // binary search
-Materia *find_materia(char *id, Materia *vettore, int size) {
-    if (size == 0) return NULL;
+Materia *find_materia(char *id, Materia *vettore, int size)
+{
+    if (size == 0)
+        return NULL;
     // prendi mezzo
     int mid = size / 2;
     int cmp = strcmp(id, vettore[mid].id_materia);
 
-    if (cmp == 0) {
+    if (cmp == 0)
+    {
         // trovato
         return &(vettore[mid]);
     }
-    if (size == 1) {
+    if (size == 1)
+    {
         // non più divisibile
         return NULL;
     }
-    if (cmp > 0) {
+    if (cmp > 0)
+    {
         // cerca a destra
         int start = mid + 1;
         return find_materia(id, &(vettore[start]), size - start);
     }
-    if (cmp < 0) {
+    if (cmp < 0)
+    {
         // cerca a sinistra
         return find_materia(id, &(vettore[0]), mid);
     }
 }
 
-Professore new_professore(char *id, char *nome, char *data) {
+Professore new_professore(char *id, char *nome, char *data)
+{
     Professore val;
     // assegna dati
     strcpy(val.id_professore, id);
@@ -225,7 +250,8 @@ Professore new_professore(char *id, char *nome, char *data) {
 }
 
 // inseirmento con priorità
-int push_professore(Professore val, Professore **vettore, int *size_vettore) {
+int push_professore(Professore val, Professore **vettore, int *size_vettore)
+{
     int size = *size_vettore;
     // cerca index dove inserire
     int index = -1;
@@ -233,13 +259,15 @@ int push_professore(Professore val, Professore **vettore, int *size_vettore) {
     {
         Professore other = (*vettore)[i];
         // id crescente
-        if (strcmp(val.id_professore, other.id_professore) < 0) {
+        if (strcmp(val.id_professore, other.id_professore) < 0)
+        {
             // index trovata
             index = i;
             break;
         }
     }
-    if (index == -1) {
+    if (index == -1)
+    {
         // in coda
         index = size;
     }
@@ -261,32 +289,39 @@ int push_professore(Professore val, Professore **vettore, int *size_vettore) {
 }
 
 // binary search
-Professore *find_professore(char *id, Professore *vettore, int size) {
-    if (size == 0) return NULL;
+Professore *find_professore(char *id, Professore *vettore, int size)
+{
+    if (size == 0)
+        return NULL;
     // prendi mezzo
     int mid = size / 2;
     int cmp = strcmp(id, vettore[mid].id_professore);
 
-    if (cmp == 0) {
+    if (cmp == 0)
+    {
         // trovato
         return &(vettore[mid]);
     }
-    if (size == 1) {
+    if (size == 1)
+    {
         // non più divisibile
         return NULL;
     }
-    if (cmp > 0) {
+    if (cmp > 0)
+    {
         // cerca a destra
         int start = mid + 1;
         return find_professore(id, &(vettore[start]), size - start);
     }
-    if (cmp < 0) {
+    if (cmp < 0)
+    {
         // cerca a sinistra
         return find_professore(id, &(vettore[0]), mid);
     }
 }
 
-Media *new_media(char *materia, float media, int occorrenze) {
+Media *new_media(char *materia, float media, int occorrenze)
+{
     Media *val = (Media *)malloc(sizeof(Media));
     assert(val != NULL);
     // assegna dati
@@ -299,18 +334,22 @@ Media *new_media(char *materia, float media, int occorrenze) {
 }
 
 // inserimento in testa
-void push_media(Media *val, Media **lista) {
-    if (val == NULL) return;
+void push_media(Media *val, Media **lista)
+{
+    if (val == NULL)
+        return;
     val->next = *lista;
     *lista = val;
 }
 
-Media *find_media(char *materia, Media *lista) {
+Media *find_media(char *materia, Media *lista)
+{
     // loop lista
     Media *m = lista;
     while (m != NULL)
     {
-        if (strcmp(materia, m->id_materia) == 0) {
+        if (strcmp(materia, m->id_materia) == 0)
+        {
             // trovato
             return m;
         }
@@ -322,7 +361,8 @@ Media *find_media(char *materia, Media *lista) {
     return NULL;
 }
 
-void free_media(Media *val) {
+void free_media(Media *val)
+{
     // loop lista
     while (val != NULL)
     {
@@ -334,7 +374,8 @@ void free_media(Media *val) {
     }
 }
 
-Studente *leggi_file(char *filename) {
+Studente *leggi_file(char *filename)
+{
     Studente *studenti = NULL;
     // apri file in lettura
     FILE *file = fopen(filename, "r");
@@ -347,7 +388,8 @@ Studente *leggi_file(char *filename) {
         // id letto correttamente
         // cerca studente
         Studente *s = find_studente(id_studente, studenti);
-        if (s == NULL) {
+        if (s == NULL)
+        {
             // nuovo studente
             s = new_studente(id_studente, NULL);
             push_studente(s, &studenti);
@@ -368,12 +410,14 @@ Studente *leggi_file(char *filename) {
     return studenti;
 }
 
-Media *prepara_pagella_studente(char *id_studente, Studente *studenti) {
+Media *prepara_pagella_studente(char *id_studente, Studente *studenti)
+{
     Media *pagella = NULL;
 
     // cerca studente
     Studente *s = find_studente(id_studente, studenti);
-    if (s != NULL) {
+    if (s != NULL)
+    {
         // studente trovato
         // loop esiti
         Esito *e = s->esiti;
@@ -381,7 +425,8 @@ Media *prepara_pagella_studente(char *id_studente, Studente *studenti) {
         {
             // cerca materia in medie
             Media *m = find_media(e->id_materia, pagella);
-            if (m == NULL) {
+            if (m == NULL)
+            {
                 // nuova materia
                 m = new_media(e->id_materia, 0.0, 0);
                 push_media(m, &pagella);
@@ -409,7 +454,8 @@ Media *prepara_pagella_studente(char *id_studente, Studente *studenti) {
 }
 
 // trasforma data in giorni
-unsigned long data_to_giorni(char *data) {
+unsigned long data_to_giorni(char *data)
+{
     // estrai valori
     unsigned long giorno = 0, mese = 0, anno = 0;
     sscanf(data, "%lu/%lu/%lu", &giorno, &mese, &anno);
@@ -422,29 +468,30 @@ unsigned long data_to_giorni(char *data) {
         // aggiungi giorni corretti
         switch (i)
         {
-            // febbraio
-            case 2:
-                giorni_mese += 24;
-                break;
-            // aprile, giugno, settembre, novembre
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                giorni_mese += 30;
-                break;
-            
-            // restanti
-            default:
-                giorni_mese += 31;
-                break;
+        // febbraio
+        case 2:
+            giorni_mese += 24;
+            break;
+        // aprile, giugno, settembre, novembre
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            giorni_mese += 30;
+            break;
+
+        // restanti
+        default:
+            giorni_mese += 31;
+            break;
         }
     }
-    
+
     return giorno + giorni_mese + giorni_anno;
 }
 
-unsigned long giorni_di_servizio(Professore *p) {
+unsigned long giorni_di_servizio(Professore *p)
+{
     // calcola giorni delle date
     unsigned long giorni_today = data_to_giorni(TODAY);
     unsigned long giorni_prof = data_to_giorni(p->data_inizio);
@@ -453,9 +500,9 @@ unsigned long giorni_di_servizio(Professore *p) {
 }
 
 void stampa_pagella_studente(
-    Media *pagella, 
-    Materia *materie, int size_materie, 
-    Professore *professori, int size_professori) 
+    Media *pagella,
+    Materia *materie, int size_materie,
+    Professore *professori, int size_professori)
 {
     // loop pagella
     Media *m = pagella;
@@ -463,22 +510,26 @@ void stampa_pagella_studente(
     {
         // cerca materia
         Materia *mat = find_materia(m->id_materia, materie, size_materie);
-        if (mat == NULL) {
+        if (mat == NULL)
+        {
             printf("MATERIA %s INESISTENTE!\n", m->id_materia);
         }
-        else {
+        else
+        {
             // cerca professore materia
             Professore *p = find_professore(mat->id_professore, professori, size_professori);
-            if (p == NULL) {
+            if (p == NULL)
+            {
                 printf("PROFESSORE %s INESISTENTE!\n", mat->id_professore);
             }
-            else {
+            else
+            {
                 // calcola giorni di servizio professore
                 unsigned long giorni_servizio = giorni_di_servizio(p);
                 // stampa dati
                 printf("Materia (%s): %s, Media esiti: %.2f, Professore (%s): %s, Giorni di Servizio (%s): %lu\n",
-                    m->id_materia, mat->descrizione, m->media_voti, 
-                    p->id_professore, p->nome_cognome, p->data_inizio, giorni_servizio);
+                       m->id_materia, mat->descrizione, m->media_voti,
+                       p->id_professore, p->nome_cognome, p->data_inizio, giorni_servizio);
             }
         }
 
@@ -487,19 +538,21 @@ void stampa_pagella_studente(
     }
 }
 
-void stampa_esiti(Esito *val) {
+void stampa_esiti(Esito *val)
+{
     // loop lista
     while (val != NULL)
     {
         // stampa dati
         printf("Materia: %s, Voto: %.2f\n", val->id_materia, val->voto);
-        
+
         // prossimo
         val = val->next;
     }
 }
 
-void stampa_studente(Studente *val) {
+void stampa_studente(Studente *val)
+{
     // loop lista
     while (val != NULL)
     {
@@ -512,25 +565,28 @@ void stampa_studente(Studente *val) {
     }
 }
 
-void stampa_professori(Professore *vettore, int size) {
+void stampa_professori(Professore *vettore, int size)
+{
     for (int i = 0; i < size; i++)
     {
         Professore p = vettore[i];
         printf("Professore: %s, Nome: %s, Data Inizio, %s\n",
-            p.id_professore, p.nome_cognome, p.data_inizio);
+               p.id_professore, p.nome_cognome, p.data_inizio);
     }
 }
 
-void stampa_materie(Materia *vettore, int size) {
+void stampa_materie(Materia *vettore, int size)
+{
     for (int i = 0; i < size; i++)
     {
         Materia m = vettore[i];
         printf("Materia: %s, Descrizione: %s, Professore, %s\n",
-            m.id_materia, m.descrizione, m.id_professore);
+               m.id_materia, m.descrizione, m.id_professore);
     }
 }
 
-int main() {
+int main()
+{
     Professore *professori = NULL;
     int size_professori = 0;
     // aggiungi professori di test
@@ -541,7 +597,7 @@ int main() {
     push_professore(p, &professori, &size_professori);
     p = new_professore("002", "Prof Sara", "15/12/2003");
     push_professore(p, &professori, &size_professori);
-    
+
     puts("PROFESSORI:");
     stampa_professori(professori, size_professori);
     putchar('\n');
@@ -583,7 +639,7 @@ int main() {
     putchar('\n');
 
     Media *pagella = prepara_pagella_studente(STUDENTE_PAGELLA, studenti);
-    
+
     printf("PAGELLA %s:\n", STUDENTE_PAGELLA);
     stampa_pagella_studente(pagella, materie, size_materie, professori, size_professori);
     putchar('\n');
