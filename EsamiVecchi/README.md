@@ -1,7 +1,3 @@
-# Legenda
-- `// TEST`: codice aggiunto post-esame per testare
-- `// ERRORE`: errore fatto (ora corretto)
-
 # Esami testati
 - [08-07-22](./08-07-22/testo080722.pdf) (1.5h)
 - [09-06-21](./09-06-21/testo090621.pdf) (1.5h - 1 errore)
