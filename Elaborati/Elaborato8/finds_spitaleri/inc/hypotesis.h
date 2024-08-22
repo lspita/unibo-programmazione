@@ -34,17 +34,18 @@
 #define _30_60 2
 #define MORE_60 3
 
-typedef struct hypotesis
-{
-    int fields[N_HYPOTESIS_FIELDS];
-    bool wait;
+typedef struct hypotesis {
+  int fields[N_HYPOTESIS_FIELDS];
+  bool wait;
 } hypotesis;
 
-void fill_hypotesis(const char (*datarow)[CSV_COL_BUFFER_SIZE], hypotesis *result);
+void fill_hypotesis(const char (*datarow)[CSV_COL_BUFFER_SIZE],
+                    hypotesis *result);
 void hypotesis_compare(hypotesis *const general, const hypotesis *const match);
 void print_hypotesis(const char *const name, const hypotesis *const h);
 hypotesis calc_general_hypotesys(const char *const filename);
-bool is_positive_hypotesis(hypotesis *const general, const hypotesis *const match);
+bool is_positive_hypotesis(hypotesis *const general,
+                           const hypotesis *const match);
 hypotesis input_hypotesis(const bool input_positive);
 void serialize_hypotesis(const hypotesis *const h, const char *const filename);
 

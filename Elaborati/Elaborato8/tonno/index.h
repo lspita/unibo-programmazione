@@ -1,8 +1,8 @@
+#include <ctype.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
-#include <ctype.h>
 
 int checkArgument(int argc, char *argv[]);
 void fflush_stdin();
@@ -24,7 +24,8 @@ char **findTitle(FILE *fptr);
 void printLine(int columnCount);
 void secure_free(char **arr, int len);
 char **InsertValue(char *prnt, char **Title, int l, int Field);
-int Compare(char **StringToCompare, char **Comparator, int l, int NField, char **Title);
+int Compare(char **StringToCompare, char **Comparator, int l, int NField,
+            char **Title);
 int Add(char **ToAdd, int l, FILE *fptr, int ask);
 void InsertTitle(FILE *fptr);
 void ShowPattern(char **Title, char **Pattern, int l);

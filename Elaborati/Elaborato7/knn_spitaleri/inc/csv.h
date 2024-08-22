@@ -5,13 +5,14 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-typedef struct file_cache
-{
-    size_t row;
-    unsigned long long offset;
+typedef struct file_cache {
+  size_t row;
+  unsigned long long offset;
 } FILE_CACHE;
 
-void csv_dimension(const char *const filename, const bool header, size_t *outrows, size_t *outcols);
-void csv_at(const char *const filename, const bool header, const size_t row, char (*result)[BUFFER_SIZE]);
+void csv_dimension(const char *const filename, const bool header,
+                   size_t *outrows, size_t *outcols);
+void csv_at(const char *const filename, const bool header, const size_t row,
+            char (*result)[BUFFER_SIZE]);
 
 #endif

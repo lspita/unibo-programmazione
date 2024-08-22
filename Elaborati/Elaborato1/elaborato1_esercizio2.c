@@ -12,23 +12,22 @@ ludovico.spitaleri@studio.unibo.it
 
 #define MPG_LPK 235.2145 // costante per conversione da miglia a litri per 100km
 
-int main()
-{
-    float miglia;
-    float galloni;
-    float MPG; // miglia per gallone
-    float LPK; // litri per kilometro
+int main() {
+  float miglia;
+  float galloni;
+  float MPG; // miglia per gallone
+  float LPK; // litri per kilometro
 
-    printf("Inserire il numero di miglia: ");
-    scanf("%f", &miglia);
+  printf("Inserire il numero di miglia: ");
+  scanf("%f", &miglia);
 
-    fflush(stdin); // pulisco il buffer
+  fflush(stdin); // pulisco il buffer
 
-    printf("Inserire il numero di galloni consumati: ");
-    scanf("%f", &galloni);
+  printf("Inserire il numero di galloni consumati: ");
+  scanf("%f", &galloni);
 
-    MPG = miglia / galloni;
-    LPK = MPG_LPK / MPG;
+  MPG = miglia / galloni;
+  LPK = MPG_LPK / MPG;
 
-    printf("\nRisultati:\nMiglia/gallone: %.2f\nLitri/100km: %.3f \n", MPG, LPK);
+  printf("\nRisultati:\nMiglia/gallone: %.2f\nLitri/100km: %.3f \n", MPG, LPK);
 }
