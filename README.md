@@ -1,6 +1,6 @@
 # Info
 
-Utilizzo di C89
+Utilizzo di C99
 
 # Legenda
 - `// TEST`: codice aggiunto post-esame per testare
